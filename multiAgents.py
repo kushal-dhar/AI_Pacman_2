@@ -78,12 +78,7 @@ class ReflexAgent(Agent):
         if (util.manhattanDistance(newGhostStates[0].getPosition(), newPos) < 2):
             score -= 1000
 
-        # print newPos
-        # print successorGameState.getFood().asList()
         minimumDist = 0
-        nextFoodDist = 0
-
-        foodArr = successorGameState.getFood()
 
 
         for food in successorGameState.getFood().asList():
@@ -98,9 +93,6 @@ class ReflexAgent(Agent):
         if(currentGameState.getNumFood() > successorGameState.getNumFood()):
             score += 100
 
-
-
-        "*** YOUR CODE HERE ***"
         return score
 
 def scoreEvaluationFunction(currentGameState):
@@ -212,7 +204,6 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         beta = 10000
         next_score_position = self.max_value(gameState, self.depth, alpha, beta, num_agents)
 
-        print "score is: ", next_score_position[0]
         return next_score_position[1]
 
     def max_value(self, gameState, depth, alpha, beta, num_agents):
@@ -243,7 +234,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         if (range == 0):
             for action in gameState.getLegalActions(agentIndex):
                 temp = self.max_value(gameState.generateSuccessor(agentIndex, action), depth - 1, alpha, beta, num_agents)
-                # print initValue, temp[0]
+
                 initValue = min(initValue, temp[0])
                 if (initValue < alpha):
                     return initValue
